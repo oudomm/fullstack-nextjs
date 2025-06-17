@@ -15,5 +15,10 @@ export const navLink: NavbarType[] = [
         path: '/product',
         name: 'Product',
         active: false,
+    },
+    {
+        path: '/contact',
+        name: 'Contact',
+        active: false,
     }
 ]
