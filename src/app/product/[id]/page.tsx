@@ -22,7 +22,9 @@ export default function page({ params }: Params) {
         <div className="w-[90%] mx-auto my-10">
             <div className="flex bg-white rounded-lg shadow dark:bg-gray-800 flex-col md:flex-row">
                 <div className="relative w-full md:w-[50%] flex justify-center items-center">
-                    <Image src={product.imageUrl} alt={product.name} width={300} height={300}
+                    <Image src={product.imageUrl} alt={product.name}
+                    width={300}
+                    height={300}
                     unoptimized
                         className="object-cover w-full h-48 md:h-full rounded-t-lg md:rounded-l-lg md:rounded-t-none" />
                 </div>
