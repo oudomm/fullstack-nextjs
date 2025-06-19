@@ -1,12 +1,7 @@
 import { products } from '@/app/data/product';
+import { Params } from '@/types/paramsType';
 import Image from 'next/image';
 import React from 'react'
-
-type Params = {
-    params: {
-        id: string;
-    }
-}
 
 export default function page({ params }: Params) {
 
