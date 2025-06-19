@@ -7,11 +7,6 @@ export const navLink: NavbarType[] = [
         active: true,
     },
     {
-        path: '/about',
-        name: 'About',
-        active: false,
-    },
-    {
         path: '/product',
         name: 'Product',
         active: false,
@@ -20,5 +15,10 @@ export const navLink: NavbarType[] = [
         path: '/user',
         name: 'User',
         active: false,
-    }
+    },
+    {
+        path: '/about',
+        name: 'About',
+        active: false,
+    },
 ]
