@@ -17,8 +17,8 @@ export const navLink: NavbarType[] = [
         active: false,
     },
     {
-        path: '/contact',
-        name: 'Contact',
+        path: '/user',
+        name: 'User',
         active: false,
     }
 ]
