@@ -1,31 +1,38 @@
-import { products } from '@/app/data/product';
+
 import { Params } from '@/types/paramsType';
+import { ProductType } from '@/types/productType';
 import Image from 'next/image';
 import React from 'react'
 
-export default function page({ params }: Params) {
+async function getProduct(id: string){
+    const BASE_API_URL = `https://dummyjson.com/products/${id}`
+    const res = fetch(BASE_API_URL);
+    const data = (await res).json();
+    const product: ProductType = await data;
+    return product;
+}
 
-    const productId = parseInt(params.id)
-    console.log(`Product ID: ${productId}`);
-
-    const product = products.find((p) => p.id === productId)
+export default async function page({ params }: Params) {
+    const product = await getProduct(params.id);
+    console.log(product)
 
     if (!product) {
         return <div className="text-center text-red-500">Product not found</div>;
     }
+
     return (
         <div className="w-[90%] mx-auto my-10">
             <div className="flex bg-white rounded-lg shadow dark:bg-gray-800 flex-col md:flex-row">
                 <div className="relative w-full md:w-[50%] flex justify-center items-center">
-                    <Image src={product.imageUrl} alt={product.name}
+                    <Image src={product.thumbnail} alt={product.title}
                     width={300}
                     height={300}
                     unoptimized
-                        className="object-cover w-full h-48 md:h-full rounded-t-lg md:rounded-l-lg md:rounded-t-none" />
+                    className="object-cover w-full h-48 md:h-full rounded-t-lg md:rounded-l-lg md:rounded-t-none" />
                 </div>
                 <form className="flex-auto p-6">
                     <div className="flex flex-wrap">
-                        <h1 className="flex-auto text-xl font-semibold dark:text-gray-50">{product.name}</h1>
+                        <h1 className="flex-auto text-xl font-semibold dark:text-gray-50">{product.title}</h1>
                         <div className="text-xl font-semibold text-gray-500 dark:text-gray-300">${product.price}</div>
                         <div className="flex-none w-full mt-2 text-sm font-medium text-gray-500 dark:text-gray-300">In stock</div>
                     </div>

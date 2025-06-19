@@ -2,6 +2,7 @@ import ProductCard from '@/components/product/ProductCard';
 import React from 'react'
 // import Link from 'next/link';
 import { ProductType } from '@/types/productType';
+import Link from 'next/link';
 
 export default async function page() {
   const BASE_URL = "https://dummyjson.com/products"
@@ -19,15 +20,16 @@ export default async function page() {
       <div className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-4'>
         {
           products.map((product) => (
-            <ProductCard
-              key={product.id}
-              id={product.id}
-              title={product.title}
-              description={product.description}
-              price={product.price}
-              thumbnail={product.thumbnail}
-              category={product.category}
-            />
+            <Link key={product.id} href={`/product/${product.id}`} className='no-underline'>
+              <ProductCard
+                id={product.id}
+                title={product.title}
+                description={product.description}
+                price={product.price}
+                thumbnail={product.thumbnail}
+                category={product.category}
+              />
+            </Link>
           ))
         }
       </div>
