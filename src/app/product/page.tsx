@@ -1,12 +1,10 @@
 import ProductCard from '@/components/product/ProductCard';
 import React from 'react'
-// import Link from 'next/link';
 import { ProductType } from '@/types/productType';
 import Link from 'next/link';
 
 export default async function page() {
-  const BASE_URL = "https://dummyjson.com/products"
-  const res = await fetch(BASE_URL);
+  const res = await fetch(`${process.env.BASE_URL_API}products`);
   if (!res.ok) {
     throw new Error('Failed to fetch products');
   }

@@ -5,8 +5,7 @@ import Image from 'next/image';
 import React from 'react'
 
 async function getProduct(id: string){
-    const BASE_API_URL = `https://dummyjson.com/products/${id}`
-    const res = fetch(BASE_API_URL);
+    const res = fetch(`${process.env.BASE_URL_API}products/${id}`);
     const data = (await res).json();
     const product: ProductType = await data;
     return product;
@@ -14,7 +13,6 @@ async function getProduct(id: string){
 
 export default async function page({ params }: Params) {
     const product = await getProduct(params.id);
-    console.log(product)
 
     if (!product) {
         return <div className="text-center text-red-500">Product not found</div>;
