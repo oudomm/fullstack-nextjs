@@ -4,7 +4,6 @@ import React from 'react'
 export default function page() {
   return (
     <>
-
       <div className="w-[90%] mx-auto flex items-center">
         <div className="sm:w-1/2 p-10">
           <div className="image object-center text-center">
