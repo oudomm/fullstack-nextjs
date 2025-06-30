@@ -1,80 +1,63 @@
-'use client'
+'use client';
 
-import { BlogType } from '@/types/blogtType'
-import Image from 'next/image'
-import Link from 'next/link'
-import React, { use } from 'react'
+import { BlogType } from '@/types/blogtType';
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
 
-export default function BlogCard({ blogs }: {
-    blogs: Promise<BlogType[]>
-}) {
-    const allBlogs = use(blogs);
-    return (
-        <div className="bg-gray-200 dark:bg-gray-800 flex items-center p-8">
-            {
-                allBlogs.map((blog) => (
-                    <div key={blog.id} className="py-8 px-4 mx-auto max-w-screen-xl h-screen lg:py-16 lg:px-6">
-                        <div className="bg-white w-96 p-4 border-2 border-gray-300 dark:border-gray-500 shadow-lg rounded-xl dark:bg-slate-700">
-                            {/* <!-- image wrapper --> */}
-                            <div>
-                                <Link href="#">
-                                    <Image className="rounded-lg"  
-                                    width={400}
-                                    height={250}
-                                    unoptimized
-                                    src="https://images.unsplash.com/photo-1624188327913-e0c59aaaa3ae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw2fHxibGFjayUyMG1hbnxlbnwwfDB8fHwxNzE5NjAxMzQ2fDA&ixlib=rb-4.0.3&q=80&w=1080"
-                                    alt={blog.title} />
-                                </Link>
-                            </div>
-                            {/* <!-- image wrapper end --> */}
-                            {/* <!-- tag --> */}
-                            <div className="capitalize text-purple-900 font-semibold my-4 bg-purple-200 w-fit px-3 rounded-lg">
-                                <p>article</p>
-                            </div>
-                            {/* <!-- tag end --> */}
-                            {/* <!-- article heading --> */}
-                            <div className="text-2xl font-bold my-2 dark:text-white">
-                                <a href="#">
-                                    <h2>{blog.title}</h2>
-                                </a>
-                            </div>
-                            {/* <!-- article heading end -->
-            <!-- article text --> */}
-                            <div className="dark:text-gray-400">
-                                <p>{blog.body}</p>
-                            </div>
-                            {/* <!-- article text end -->
-            <!-- blogger --> */}
-                            <div className="flex items-cente">
-                                {/* <!-- blogger img --> */}
-                                <div className="mt-4">
-                                    <Image className="w-12 h-12 object-cover rounded-full" 
-                                    width={50}
-                                    height={50}
-                                    unoptimized
-                                    src="https://images.unsplash.com/photo-1624188327913-e0c59aaaa3ae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw2fHxibGFjayUyMG1hbnxlbnwwfDB8fHwxNzE5NjAxMzQ2fDA&ixlib=rb-4.0.3&q=80&w=1080" alt="image" />
-                                </div>
-                                {/* <!-- blogger img end -->
-                <!-- blogger details --> */}
-                                <div className="block mt-3.5">
-                                    {/* <!-- blogger name --> */}
-                                    <div className="capitalize text-lg font-semibold pl-4 dark:text-white">
-                                        <h3>robert chunga</h3>
-                                    </div>
-                                    {/* <!-- blogger name end -->
-                    <!-- blog date --> */}
-                                    <div className="capitalize text-sm text-gray-400 pl-4">
-                                        <p>Aug 15, 2021 · 16 min read</p>
-                                    </div>
-                                    {/* <!-- blog date end --> */}
-                                </div>
-                                {/* <!-- blogger details end --> */}
-                            </div>
-                            {/* <!-- blogger end --> */}
-                        </div>
-                    </div>
-                ))
-            }
-        </div>
-    )
+export default function BlogCard({ blogs }: { blogs: BlogType[] }) {
+  return (
+    <>
+      {blogs.map((blog) => (
+        <Link href={`/blog/${blog.id}`} key={blog.id}>
+          <div
+            key={blog.id}
+            className="bg-white dark:bg-slate-800 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col overflow-hidden"
+          >
+            <div className="relative h-48 w-full">
+              <Image
+                className="object-cover"
+                fill
+                unoptimized
+                src="https://images.unsplash.com/photo-1624188327913-e0c59aaaa3ae?auto=format&fit=crop&w=800&q=80"
+                alt={blog.title}
+              />
+            </div>
+
+            <div className="flex-1 flex flex-col p-5">
+              <span className="inline-block bg-purple-100 text-purple-800 text-xs font-semibold rounded-full px-3 py-1 mb-2 w-fit">
+                Article
+              </span>
+
+              <h2 className="text-xl font-bold mb-2 text-gray-900 dark:text-white hover:text-purple-700 transition-colors">
+                {blog.title}
+              </h2>
+
+              <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
+                {blog.body}
+              </p>
+              <div className="flex items-center mt-auto pt-4 border-t border-gray-100 dark:border-gray-700">
+                <Image
+                  className="w-10 h-10 object-cover rounded-full"
+                  width={40}
+                  height={40}
+                  unoptimized
+                  src="https://images.unsplash.com/photo-1624188327913-e0c59aaaa3ae?auto=format&fit=facearea&w=128&q=80"
+                  alt="Author"
+                />
+                <div className="ml-3">
+                  <div className="text-sm font-semibold text-gray-800 dark:text-white">
+                    Robert Chunga
+                  </div>
+                  <div className="text-xs text-gray-400">
+                    Aug 15, 2021 · 16 min read
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Link>
+      ))}
+    </>
+  );
 }
