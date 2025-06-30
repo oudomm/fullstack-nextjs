@@ -40,7 +40,7 @@ export default function User() {
   };
 
   return (
-    <div className="w-[90%] mx-auto mt-10">
+    <div className="w-[90%] mx-auto mt-28">
       <input
         type="text"
         placeholder="Search users..."

@@ -7,7 +7,8 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 'dummyjson.com', pathname: '/icon/**' },
-      { protocol: 'https', hostname: 'i.pravatar.cc', pathname: '/**' }, // <-- Add this line
+      { protocol: 'https', hostname: 'i.pravatar.cc', pathname: '/**' },
+      { protocol: 'https', hostname: 'cdn.dummyjson.com', pathname: '/**' }, // <-- Add this line
     ],
   },
 };
