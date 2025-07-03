@@ -19,7 +19,7 @@ export default function BlogCard({ blogs }: { blogs: BlogType[] }) {
                 className="object-cover"
                 fill
                 unoptimized
-                src="https://images.unsplash.com/photo-1624188327913-e0c59aaaa3ae?auto=format&fit=crop&w=800&q=80"
+                src={`https://i.pravatar.cc/500?img=${+blog.id + 10}`}
                 alt={blog.title}
               />
             </div>

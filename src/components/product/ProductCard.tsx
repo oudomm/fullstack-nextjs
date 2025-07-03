@@ -1,7 +1,7 @@
-'use client';
-import { ProductType } from '@/types/productType';
-import Image from 'next/image';
-import React, { useState } from 'react';
+"use client";
+import { ProductType } from "@/types/productType";
+import Image from "next/image";
+import React, { useState } from "react";
 
 export default function ProductCard({
   title,
@@ -24,9 +24,9 @@ export default function ProductCard({
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1000));
       // Handle add to cart logic here
-      console.log('Added to cart:', { title, price });
+      console.log("Added to cart:", { title, price });
     } catch (error) {
-      console.error('Failed to add to cart:', error);
+      console.error("Failed to add to cart:", error);
     } finally {
       setIsLoading(false);
     }
@@ -38,18 +38,18 @@ export default function ProductCard({
 
   const handleQuickView = () => {
     // Handle quick view logic here
-    console.log('Quick view:', title);
+    console.log("Quick view:", title);
   };
 
   return (
-    <div className="group relative bg-white dark:bg-slate-800 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 shadow-lg hover:shadow-2xl transition-all duration-300">
+    <div className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg transition-all duration-300 hover:shadow-2xl dark:border-slate-700 dark:bg-slate-800">
       {/* Image Container */}
       <div className="relative overflow-hidden bg-slate-100 dark:bg-slate-700">
         {!imageError ? (
           <Image
             width={400}
             height={300}
-            className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+            className="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-110"
             src={thumbnail}
             alt={title}
             onError={() => setImageError(true)}
@@ -58,9 +58,9 @@ export default function ProductCard({
             blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sb2r+VdLKSfUucxsQCJAoJg=="
           />
         ) : (
-          <div className="w-full h-64 bg-slate-200 dark:bg-slate-600 flex items-center justify-center">
+          <div className="flex h-64 w-full items-center justify-center bg-slate-200 dark:bg-slate-600">
             <svg
-              className="w-12 h-12 text-slate-400"
+              className="h-12 w-12 text-slate-400"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -76,34 +76,34 @@ export default function ProductCard({
         )}
 
         {/* Overlay */}
-        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300"></div>
+        <div className="absolute inset-0 bg-black/0 transition-all duration-300 group-hover:bg-black/20"></div>
 
         {/* Sale Badge */}
         {savings > 0 && (
-          <div className="absolute top-4 right-4 bg-gradient-to-r from-red-500 to-red-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+          <div className="absolute top-4 right-4 rounded-full bg-gradient-to-r from-red-500 to-red-600 px-3 py-1 text-xs font-bold text-white shadow-lg">
             SALE
           </div>
         )}
 
         {/* Category Badge */}
-        <div className="absolute top-4 left-4 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm text-slate-700 dark:text-slate-300 px-3 py-1 rounded-full text-xs font-medium border border-slate-200 dark:border-slate-600">
+        <div className="absolute top-4 left-4 rounded-full border border-slate-200 bg-white/90 px-3 py-1 text-xs font-medium text-slate-700 backdrop-blur-sm dark:border-slate-600 dark:bg-slate-800/90 dark:text-slate-300">
           {category}
         </div>
 
         {/* Quick Actions */}
-        <div className="absolute bottom-4 right-4 flex space-x-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+        <div className="absolute right-4 bottom-4 flex translate-y-2 transform space-x-2 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
           <button
             onClick={handleToggleLike}
-            className={`p-2 backdrop-blur-sm rounded-full transition-colors shadow-lg ${
+            className={`rounded-full p-2 shadow-lg backdrop-blur-sm transition-colors ${
               isLiked
-                ? 'bg-red-500 text-white'
-                : 'bg-white/90 dark:bg-slate-800/90 text-slate-700 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-800'
+                ? "bg-red-500 text-white"
+                : "bg-white/90 text-slate-700 hover:bg-white dark:bg-slate-800/90 dark:text-slate-300 dark:hover:bg-slate-800"
             }`}
-            aria-label={isLiked ? 'Remove from favorites' : 'Add to favorites'}
+            aria-label={isLiked ? "Remove from favorites" : "Add to favorites"}
           >
             <svg
-              className="w-4 h-4"
-              fill={isLiked ? 'currentColor' : 'none'}
+              className="h-4 w-4"
+              fill={isLiked ? "currentColor" : "none"}
               stroke="currentColor"
               viewBox="0 0 24 24"
             >
@@ -117,11 +117,11 @@ export default function ProductCard({
           </button>
           <button
             onClick={handleQuickView}
-            className="p-2 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm rounded-full text-slate-700 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-800 transition-colors shadow-lg"
+            className="rounded-full bg-white/90 p-2 text-slate-700 shadow-lg backdrop-blur-sm transition-colors hover:bg-white dark:bg-slate-800/90 dark:text-slate-300 dark:hover:bg-slate-800"
             aria-label="Quick view"
           >
             <svg
-              className="w-4 h-4"
+              className="h-4 w-4"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -144,12 +144,12 @@ export default function ProductCard({
       </div>
 
       {/* Content */}
-      <div className="p-6 space-y-4">
+      <div className="space-y-4 p-6">
         <div className="space-y-2">
-          <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100 line-clamp-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+          <h3 className="line-clamp-1 text-lg font-bold text-slate-900 transition-colors group-hover:text-green-600 dark:text-slate-100 dark:group-hover:text-green-400">
             {title}
           </h3>
-          <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
+          <p className="line-clamp-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
             {description}
           </p>
         </div>
@@ -164,8 +164,8 @@ export default function ProductCard({
             {[...Array(5)].map((_, i) => (
               <svg
                 key={i}
-                className={`w-4 h-4 ${
-                  i < 4 ? 'text-yellow-400' : 'text-yellow-300'
+                className={`h-4 w-4 ${
+                  i < 4 ? "text-yellow-400" : "text-yellow-300"
                 } fill-current`}
                 viewBox="0 0 20 20"
               >
@@ -183,16 +183,16 @@ export default function ProductCard({
           <div className="space-y-1">
             <div className="flex items-center space-x-2">
               <span className="text-2xl font-bold text-slate-900 dark:text-slate-100">
-                ${typeof price === 'number' ? price.toFixed(2) : price}
+                ${typeof price === "number" ? price.toFixed(2) : price}
               </span>
               {savings > 0 && (
-                <span className="text-sm text-slate-500 dark:text-slate-400 line-through">
+                <span className="text-sm text-slate-500 line-through dark:text-slate-400">
                   ${originalPrice.toFixed(2)}
                 </span>
               )}
             </div>
             {savings > 0 && (
-              <div className="text-xs text-green-600 dark:text-green-400 font-medium">
+              <div className="text-xs font-medium text-green-600 dark:text-green-400">
                 Save ${savings.toFixed(2)}
               </div>
             )}
@@ -201,12 +201,12 @@ export default function ProductCard({
           <button
             onClick={handleAddToCart}
             disabled={isLoading}
-            className="group/btn flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 disabled:from-blue-400 disabled:to-blue-400 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-blue-500/25 hover:-translate-y-0.5 disabled:hover:translate-y-0 disabled:hover:shadow-lg"
+            className="group/btn flex items-center rounded-xl bg-gradient-to-r from-green-600 to-green-700 px-4 py-2 font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:from-green-700 hover:to-green-800 hover:shadow-xl hover:shadow-green-500/25 disabled:cursor-not-allowed disabled:from-green-400 disabled:to-green-400 disabled:hover:translate-y-0 disabled:hover:shadow-lg"
           >
             {isLoading ? (
               <>
                 <svg
-                  className="w-4 h-4 mr-2 animate-spin"
+                  className="mr-2 h-4 w-4 animate-spin"
                   fill="none"
                   viewBox="0 0 24 24"
                 >
@@ -229,7 +229,7 @@ export default function ProductCard({
             ) : (
               <>
                 <svg
-                  className="w-4 h-4 mr-2 transition-transform group-hover/btn:scale-110"
+                  className="mr-2 h-4 w-4 transition-transform group-hover/btn:scale-110"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"

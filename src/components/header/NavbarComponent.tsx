@@ -1,52 +1,52 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { navLink } from './menu';
-import { usePathname } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import Link from "next/link";
+import { navLink } from "./menu";
+import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 
 export default function NavbarComponent() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [theme, setTheme] = useState<"light" | "dark">("light");
 
   // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Theme: Load from localStorage or system
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('theme');
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("theme");
       if (
-        saved === 'dark' ||
-        (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)
+        saved === "dark" ||
+        (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches)
       ) {
-        setTheme('dark');
-        document.documentElement.classList.add('dark');
+        setTheme("dark");
+        document.documentElement.classList.add("dark");
       } else {
-        setTheme('light');
-        document.documentElement.classList.remove('dark');
+        setTheme("light");
+        document.documentElement.classList.remove("dark");
       }
     }
   }, []);
 
   // Theme: Toggle handler
   const toggleTheme = () => {
-    if (theme === 'light') {
-      setTheme('dark');
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
+    if (theme === "light") {
+      setTheme("dark");
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
     } else {
-      setTheme('light');
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
+      setTheme("light");
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
     }
   };
 
@@ -61,57 +61,57 @@ export default function NavbarComponent() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-lg border-b border-slate-200/50 dark:border-slate-700/50'
-          : 'bg-white/60 dark:bg-slate-900/60 backdrop-blur-sm'
+          ? "border-b border-slate-200/50 bg-white/80 shadow-lg backdrop-blur-md dark:border-slate-700/50 dark:bg-slate-900/80"
+          : "bg-white/60 backdrop-blur-sm dark:bg-slate-900/60"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16 lg:h-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex h-16 items-center justify-between lg:h-20">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center space-x-2 group">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center transform transition-transform group-hover:scale-110">
-                <span className="text-white font-bold text-sm">M</span>
+            <Link href="/" className="group flex items-center space-x-2">
+              <div className="flex h-8 w-8 transform items-center justify-center rounded-lg bg-gradient-to-br from-green-600 to-blue-600 transition-transform group-hover:scale-110">
+                <span className="text-sm font-bold text-white">M</span>
               </div>
-              <span className="text-xl lg:text-2xl font-bold bg-gradient-to-r from-slate-900 to-slate-600 dark:from-slate-100 dark:to-slate-400 bg-clip-text text-transparent">
-                MyBrand
+              <span className="bg-gradient-to-r from-slate-900 to-slate-600 bg-clip-text text-xl font-bold text-transparent lg:text-2xl dark:from-slate-100 dark:to-slate-400">
+                NextSpring
               </span>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-1">
+          <div className="hidden items-center space-x-1 md:flex">
             {navLink.map((item, index) => (
               <Link
                 key={index}
                 href={item.path}
-                className={`relative px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
+                className={`relative rounded-xl px-4 py-2 text-sm font-medium transition-all duration-200 ${
                   pathname === item.path
-                    ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/50'
-                    : 'text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800/50'
+                    ? "bg-green-50 text-green-600 dark:bg-green-950/50 dark:text-green-400"
+                    : "text-slate-700 hover:bg-slate-50 hover:text-green-600 dark:text-slate-300 dark:hover:bg-slate-800/50 dark:hover:text-green-400"
                 }`}
               >
                 {item.name}
                 {pathname === item.path && (
-                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-blue-600 dark:bg-blue-400 rounded-full"></div>
+                  <div className="absolute bottom-0 left-1/2 h-1 w-1 -translate-x-1/2 transform rounded-full bg-green-600 dark:bg-green-400"></div>
                 )}
               </Link>
             ))}
           </div>
 
           {/* Desktop CTA Button */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden items-center space-x-4 md:flex">
             <button
-              className="p-2 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              className="rounded-xl p-2 text-slate-600 transition-colors hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800"
               onClick={toggleTheme}
               aria-label="Toggle theme"
             >
-              {theme === 'dark' ? (
+              {theme === "dark" ? (
                 // Sun icon for light mode
                 <svg
-                  className="w-5 h-5"
+                  className="h-5 w-5"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -133,7 +133,7 @@ export default function NavbarComponent() {
               ) : (
                 // Moon icon for dark mode
                 <svg
-                  className="w-5 h-5"
+                  className="h-5 w-5"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -149,11 +149,11 @@ export default function NavbarComponent() {
             </button>
             <Link
               href="#contact"
-              className="group relative inline-flex items-center px-6 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl hover:shadow-blue-500/25 hover:-translate-y-0.5"
+              className="group relative inline-flex items-center rounded-xl bg-gradient-to-r from-green-600 to-green-700 px-6 py-2.5 text-sm font-semibold text-white shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:from-green-700 hover:to-green-800 hover:shadow-xl hover:shadow-green-500/25"
             >
               Get Started
               <svg
-                className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-0.5"
+                className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -169,15 +169,15 @@ export default function NavbarComponent() {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center space-x-2">
+          <div className="flex items-center space-x-2 md:hidden">
             <button
-              className="p-2 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              className="rounded-xl p-2 text-slate-600 transition-colors hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800"
               onClick={toggleTheme}
               aria-label="Toggle theme"
             >
-              {theme === 'dark' ? (
+              {theme === "dark" ? (
                 <svg
-                  className="w-5 h-5"
+                  className="h-5 w-5"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -198,7 +198,7 @@ export default function NavbarComponent() {
                 </svg>
               ) : (
                 <svg
-                  className="w-5 h-5"
+                  className="h-5 w-5"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -214,11 +214,11 @@ export default function NavbarComponent() {
             </button>
             <button
               onClick={toggleMobileMenu}
-              className="p-2 rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors focus:outline-none"
+              className="rounded-xl p-2 text-slate-700 transition-colors hover:bg-slate-100 focus:outline-none dark:text-slate-300 dark:hover:bg-slate-800"
             >
               <svg
-                className={`w-6 h-6 transition-transform duration-200 ${
-                  isMobileMenuOpen ? 'rotate-90' : ''
+                className={`h-6 w-6 transition-transform duration-200 ${
+                  isMobileMenuOpen ? "rotate-90" : ""
                 }`}
                 fill="none"
                 stroke="currentColor"
@@ -247,22 +247,22 @@ export default function NavbarComponent() {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden transition-all duration-300 ease-in-out ${
+        className={`transition-all duration-300 ease-in-out md:hidden ${
           isMobileMenuOpen
-            ? 'max-h-96 opacity-100'
-            : 'max-h-0 opacity-0 overflow-hidden'
+            ? "max-h-96 opacity-100"
+            : "max-h-0 overflow-hidden opacity-0"
         }`}
       >
-        <div className="px-4 py-6 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200/50 dark:border-slate-700/50">
+        <div className="border-t border-slate-200/50 bg-white/95 px-4 py-6 backdrop-blur-md dark:border-slate-700/50 dark:bg-slate-900/95">
           <div className="space-y-2">
             {navLink.map((item, index) => (
               <Link
                 key={index}
                 href={item.path}
-                className={`block px-4 py-3 rounded-xl text-base font-medium transition-all duration-200 ${
+                className={`block rounded-xl px-4 py-3 text-base font-medium transition-all duration-200 ${
                   pathname === item.path
-                    ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/50'
-                    : 'text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800/50'
+                    ? "bg-green-50 text-green-600 dark:bg-green-950/50 dark:text-green-400"
+                    : "text-slate-700 hover:bg-slate-50 hover:text-green-600 dark:text-slate-300 dark:hover:bg-slate-800/50 dark:hover:text-green-400"
                 }`}
               >
                 {item.name}
@@ -270,14 +270,14 @@ export default function NavbarComponent() {
             ))}
           </div>
 
-          <div className="mt-6 pt-6 border-t border-slate-200 dark:border-slate-700">
+          <div className="mt-6 border-t border-slate-200 pt-6 dark:border-slate-700">
             <Link
               href="#contact"
-              className="flex items-center justify-center w-full px-6 py-3 text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg"
+              className="flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-green-600 to-green-700 px-6 py-3 text-base font-semibold text-white shadow-lg transition-all duration-200 hover:from-green-700 hover:to-green-800"
             >
               Get Started
               <svg
-                className="w-4 h-4 ml-2"
+                className="ml-2 h-4 w-4"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"

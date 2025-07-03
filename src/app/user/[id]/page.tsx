@@ -25,7 +25,7 @@ export default function UserDetail() {
   }
 
   return (
-    <div className="max-w-xl mx-auto mt-10 bg-white dark:bg-slate-800 rounded-xl shadow-md p-8">
+    <div className="max-w-xl mx-auto mt-30 bg-white dark:bg-slate-800 rounded-xl shadow-md p-8">
       <div className="flex items-center gap-6">
         <Image
           src={`https://i.pravatar.cc/300?img=${id}`}
