@@ -1,19 +1,7 @@
 "use client";
-import { useEffect } from "react";
+import LottieAnimation from "@/components/home/lottie-desktop";
 
 export default function Home() {
-  useEffect(() => {
-    // Dynamically load the dotlottie-player script on the client
-    const script = document.createElement("script");
-    script.src =
-      "https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs";
-    script.type = "module";
-    document.body.appendChild(script);
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-
   return (
     <>
       <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-50 via-white to-green-50/30 dark:from-slate-950 dark:via-slate-900 dark:to-green-950/20">
@@ -124,15 +112,8 @@ export default function Home() {
 
                 {/* Main Image Container */}
                 <div className="relative flex flex-col items-center rounded-3xl border border-slate-200 bg-white/80 p-6 shadow-2xl backdrop-blur-sm dark:border-slate-700 dark:bg-slate-800/80">
-                  {/* Add your dotlottie-player here */}
-                  <dotlottie-player
-                    src="https://lottie.host/d4efe43b-c207-40a6-9ac9-43430e22a7ac/NCprP4pKcK.lottie"
-                    background="transparent"
-                    speed="1"
-                    style={{ width: 300, height: 300 }}
-                    loop
-                    autoplay
-                  ></dotlottie-player>
+                  {/*  dotlottie-player*/}
+                  <LottieAnimation />
                 </div>
 
                 {/* Floating Cards */}
